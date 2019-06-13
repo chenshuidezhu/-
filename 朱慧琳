@@ -1,0 +1,99 @@
+//用eclipse软件
+
+package zuoye;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class zuoye
+{	int k=0;
+	public int fangfa(ArrayList<Student> list)
+	{
+		ArrayList<Student> list1 = new ArrayList<>();
+		int j = 0;
+		
+		if(list.size()!=0)
+		{	
+		for (int i = 1; i < list.size(); i++)
+			{
+				Student b = list.get(j);
+				Student c = list.get(i);
+				if (b.end < c.start)
+					{j=i;
+					continue;}
+				else
+					list1.add(c);
+
+			}
+			k++;
+			fangfa(list1);
+			
+	}return k;
+	}
+	
+	
+	public static void main(String[] args)
+	{
+		// TODO Auto-generated method stub
+		ArrayList<Student> list=new ArrayList<>();
+		
+		list.add(new Student(1,23));
+		list.add(new Student(12,28));
+		list.add(new Student(27,80));
+		list.add(new Student(36,50));
+		list.add(new Student(25,35));
+		
+		Comparator<Student> comp=new Comparator<Student>() {
+
+			@Override
+			public int compare(Student a, Student b)
+			{
+				if(a.start<b.start)
+					return -1;
+				if(a.start>b.start)
+					return 1;
+			
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+		};
+		Collections.sort(list,comp);
+				
+		zuoye z=new zuoye();
+		int shuchu=z.fangfa(list);
+		System.out.println(shuchu);
+		
+	}
+
+}
+
+
+
+//Student类
+
+package zuoye;
+
+public class Student
+{
+	int start;
+	int end;
+
+	public Student()
+	{
+
+	}
+
+	public Student(int start, int end)
+	{
+		this.start = start;
+		this.end = end;
+	}
+
+	public String toString()
+	{
+		return start + " " + end;
+	}
+
+}
